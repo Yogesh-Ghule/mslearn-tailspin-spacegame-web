@@ -1,3 +1,16 @@
-pool: MyAgentPool
-steps:
-- bash: echo hello world
+trigger:
+- main
+
+pool:
+  vmImage: 'Ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+jobs:
+- job: Build
+  displayName: 'Build Job'
+  steps:
+  - script: |
+      dotnet build --configuration $(buildConfiguration)
+    displayName: 'dotnet build $(buildConfiguration)'
